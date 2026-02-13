@@ -5,7 +5,6 @@ import Menu.GestioneMenu;
 import java.io.*;
 import java.nio.file.*;
 import java.time.*;
-import java.time.format.*;
 /**
  *
  * @author Andrea Marco Giaccherini
@@ -14,13 +13,9 @@ import java.time.format.*;
 public class Main {
     
     private static int Scelta = 0;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
-    static File file;
+    private static File file;
 
     public static void main(String[] args) {
-        
-        LocalDate Today = LocalDate.now(); 
         
         GestioneMenu Menu = new GestioneMenu();
         Config config = new Config();

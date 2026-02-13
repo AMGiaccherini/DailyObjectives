@@ -11,7 +11,6 @@ import javax.swing.*;
 public class Config {
     
     private static final String USERHOME = System.getProperty("user.home");
-    
     private static final String CONFIGPATH = USERHOME+File.separator+"DailyObjectives"+File.separator+"config.properties";
     
     private final Properties props;
