@@ -65,11 +65,11 @@ public class Config {
         chooser.setDialogTitle("Seleziona la cartella dove salvare i file");
         chooser.setAcceptAllFileFilterUsed(false);
         
-        if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            return chooser.getSelectedFile();
+        if(chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
+            System.out.println("Scelta annullata, chiusura del programma!");
+            System.exit(0);
         }
-        
-        return null;
+        return chooser.getSelectedFile();
     }
     
 }

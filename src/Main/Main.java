@@ -3,6 +3,7 @@ package Main;
 import FileSorting.*;
 import Menu.GestioneMenu;
 import java.io.*;
+import java.nio.file.*;
 import java.time.*;
 import java.time.format.*;
 /**
@@ -23,13 +24,18 @@ public class Main {
         
         GestioneMenu Menu = new GestioneMenu();
         Config config = new Config();
-        
-        if(config.GetConfig("FolderPath") == null) {
+                
+        if(config.GetConfig("FolderPath") == null || config.GetConfig("FolderPath").isEmpty()) {
             file = Config.ScegliCartella();
             config.SetConfig("FolderPath", file.getAbsolutePath());
             config.save();
         } else {
             file = new File(config.GetConfig("FolderPath"));
+            if (!Files.exists(file.toPath())) {
+                file = Config.ScegliCartella();
+                config.SetConfig("FolderPath", file.getAbsolutePath());
+                config.save();
+            }
         }
         
         ManagingFile File = new ManagingFile(file);
