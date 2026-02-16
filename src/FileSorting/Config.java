@@ -3,6 +3,7 @@ package FileSorting;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 /**
  *
  * @author Andrea Marco Giaccherini
@@ -29,7 +30,7 @@ public class Config {
                 try (FileInputStream fis = new FileInputStream(ConfigFile)) {
                     props.load(fis);
                 } catch (IOException e) {
-                    System.out.println("Errore: "+e);
+                    e.printStackTrace();
                 }
             } else {
                 ConfigFile.getParentFile().mkdirs();
@@ -37,7 +38,7 @@ public class Config {
                 save(); 
             }
         } catch (IOException e) {
-            System.out.println("Errore: "+e);
+            e.printStackTrace();
         }
     }
     
@@ -45,20 +46,25 @@ public class Config {
         try (FileOutputStream fos = new FileOutputStream(ConfigFile)) {
             props.store(fos, "Configurazione applicazione"); 
         } catch (IOException e) {
-            System.out.println("Errore: "+e);
+            e.printStackTrace();
         }
     }
     
-    public String GetConfig(String key) {
-        return props.getProperty(key);
-    }
+    public String GetConfig(String key) {return props.getProperty(key);}
     
-    public void SetConfig(String key, String value) {
-        props.setProperty(key, value);
-    }
+    public void SetConfig(String key, String value) {props.setProperty(key, value);}
     
     public static File ScegliCartella() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        UIManager.put("FileChooser.useShellFolder", Boolean.TRUE);
+
         JFileChooser chooser = new JFileChooser();
+        chooser.setFileSystemView(FileSystemView.getFileSystemView());
+        chooser.updateUI();
         
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.setDialogTitle("Seleziona la cartella dove salvare i file");
@@ -70,5 +76,4 @@ public class Config {
         }
         return chooser.getSelectedFile();
     }
-    
 }

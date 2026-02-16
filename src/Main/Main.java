@@ -1,10 +1,10 @@
 package Main;
 
+import GUI.Window;
 import FileSorting.*;
-import Menu.GestioneMenu;
 import java.io.*;
 import java.nio.file.*;
-import java.time.*;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author Andrea Marco Giaccherini
@@ -12,12 +12,9 @@ import java.time.*;
  */
 public class Main {
     
-    private static int Scelta = 0;
     private static File file;
 
     public static void main(String[] args) {
-        
-        GestioneMenu Menu = new GestioneMenu();
         Config config = new Config();
                 
         if(config.GetConfig("FolderPath") == null || config.GetConfig("FolderPath").isEmpty()) {
@@ -34,50 +31,9 @@ public class Main {
         }
         
         ManagingFile File = new ManagingFile(file);
-
-        File.CheckObjectives();
-        System.out.println();
-        
-        do {
-            Scelta = Menu.StampaMenu();
-            
-            System.out.println();
-            
-            switch(Scelta) {
-                case 1 -> {
-                    System.out.println("Scegli la data:\n");
-                    LocalDate Date = Menu.GestioneDate();
-                    File.AddObjectives(Date);
-                    break;
-                }
-                case 2 -> {
-                    System.out.println("Scegli la data:\n");
-                    LocalDate Date = Menu.GestioneDate();
-                    File.TickObjectives(File.FindCrossedObjectives(Date), Date);
-                    break;
-                }
-                case 3 -> {
-                    File.StampEveryDate();
-                    break;
-                }
-                case 4 -> {
-                    System.out.println("Scegli la data:\n");
-                    LocalDate Date = Menu.GestioneDate();
-                    File.StampObjective(Date);
-                    break;
-                }
-                case 5 -> {
-                    System.out.println("Scegli la data:\n");
-                    LocalDate Date = Menu.GestioneDate();
-                    File.RemoveDate(Date);
-                    break;
-                }
-                case 6 -> {
-                    System.out.println("Arrivederci!");
-                    break;
-                }
-            } 
-        } while(Scelta != 6);
-        System.out.println("Il Programma è terminato con successo tutti i cambiamenti sono permanenti.");
+        SwingUtilities.invokeLater(() -> {
+            Window window = new Window(file);
+            window.setVisible(true);
+        });
     }
 }
