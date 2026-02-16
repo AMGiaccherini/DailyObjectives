@@ -22,9 +22,9 @@ public class Window extends JFrame {
         Window.managingFile = new ManagingFile(file);
 
         setTitle("Daily Objectives");
-        java.net.URL iconUrl = Window.class.getResource("\\assets\\app-icon.png");
+        ImageIcon iconUrl = new ImageIcon(Window.class.getResource("\\assets\\app-icon.png"));
         if (iconUrl != null) {
-            setIconImage(new javax.swing.ImageIcon(iconUrl).getImage());
+            setIconImage(iconUrl.getImage());
         }
         
 
