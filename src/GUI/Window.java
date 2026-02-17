@@ -23,7 +23,7 @@ public class Window extends JFrame {
 
         setTitle("Daily Objectives");
 
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("app-icon.png"));
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("res/app-icon.png"));
         setIconImage(icon.getImage());
 
         setUndecorated(true);
