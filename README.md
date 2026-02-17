@@ -26,7 +26,7 @@ DailyObjectives is a Java Swing desktop app for managing daily goals.
 ### Run ▶️
 
 Easily install the current release, at the first start the application will ask your desired folder to save the files.
-If for anything the program can't find the path (folder delete or path not present in config file for example) the program will
+If for any reason the program can't find the path (folder delete or path not present in config file for example) the program will
 ask you again to chose your desired folder.
 
 ## Project Structure 📂
