@@ -1,11 +1,11 @@
 package GUI;
 
-import java.util.*;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.*;
 import java.time.format.*;
+import java.util.*;
+import javax.swing.*;
 /**
  *
  * @author Andrea Marco Giaccherini
@@ -58,6 +58,7 @@ public class LeftPanel {
 
         datesList.setCellRenderer(renderer);
         datesList.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
             public void mouseMoved(MouseEvent e) {
                 int index = datesList.locationToIndex(e.getPoint());
                 boolean hoverOnDelete = false;
@@ -73,11 +74,13 @@ public class LeftPanel {
         });
 
         datesList.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseExited(MouseEvent e) {
                 renderer.setHoveredIndex(-1, false);
                 datesList.repaint();
             }
 
+            @Override
             public void mousePressed(MouseEvent e) {
                 if (Window.managingFile.GetViewOldArchive()) {
                     return;

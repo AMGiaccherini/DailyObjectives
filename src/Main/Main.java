@@ -1,7 +1,7 @@
 package Main;
 
-import GUI.Window;
 import FileSorting.*;
+import GUI.Window;
 import java.io.*;
 import java.nio.file.*;
 import javax.swing.SwingUtilities;

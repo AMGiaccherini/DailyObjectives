@@ -1,9 +1,9 @@
 package FileSorting;
 
-import java.time.*;
-import java.time.format.*;
 import java.io.*;
 import java.nio.file.*;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
 /**
  *
@@ -27,10 +27,22 @@ public class ManagingFile {
        TempTextFile = new File(file.getAbsolutePath()+File.separator+"Temp-Annotations.txt");
        OldTextFile = new File(file.getAbsolutePath()+File.separator+"OldAnnotations.txt");
        
+       TryCreateFiles();
        RemoveOldDate();
     } 
+
+    private void TryCreateFiles() {
+        try {
+            if(TextFile.exists()) {
+                AddAbilityToFile(TextFile, true, true);
+            } else {
+                TextFile.createNewFile();
+                AddAbilityToFile(TextFile, true, true);
+            }
+        } catch (IOException e) {}
+    }
     
-    public void RemoveDate(LocalDate Date) {      
+    public  void RemoveDate(LocalDate Date) {      
         if(!CheckDayExist(Date)) return;
         
         Map<LocalDate, List<String>> agenda = ReadFile(TextFile);
@@ -77,9 +89,7 @@ public class ManagingFile {
             WriteFile(agendaOld, TempTextFile);
             ReplaceFile(TempTextFile, OldTextFile);
         
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
     
     public void AddDay(LocalDate Date) {
@@ -108,9 +118,7 @@ public class ManagingFile {
     private void ReplaceFile(File source, File target) {
         try {
             Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
     
     private Map<LocalDate, List<String>> ReadFile(File file) {
@@ -132,7 +140,6 @@ public class ManagingFile {
                     agenda.get(CurrentDate).add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
         
@@ -149,18 +156,14 @@ public class ManagingFile {
                 
                 bw.write("--------------\n\n");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
 
     private void EnsureTextFileExists() {
         try {
             if (TextFile.createNewFile()) 
                 AddAbilityToFile(TextFile, true, true); 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
 
     public boolean TryAddDate(LocalDate Date) {
@@ -228,9 +231,7 @@ public class ManagingFile {
         try {
             if(OldTextFile.createNewFile()) 
                 AddAbilityToFile(OldTextFile, viewOldArchive, viewOldArchive);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
 
     private File GetCurretViewFile() {
