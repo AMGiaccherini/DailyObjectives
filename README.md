@@ -51,7 +51,3 @@ I understand and actively modify the generated code, and I plan to refactor the 
 ## License
 
 This project is licensed under the MIT License.
-
-## Video 📹
-
-https://github.com/user-attachments/assets/3f93203a-14e9-4233-ba90-00ad4ab939c5
