@@ -1,4 +1,4 @@
-# DailyObjectives <img width="48" height="48" src="./src/res/app-icon.png">
+# DailyObjectives <img width="32" height="32" src="./src/res/app-icon.png">
 DailyObjectives is a Java Swing desktop app for managing daily goals.
 
 ## Screenshots 📷
